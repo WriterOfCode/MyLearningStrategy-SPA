@@ -1,0 +1,59 @@
+<form novalidate #responseInfoForm="ngForm">
+  <fieldset>
+    <div>
+      <div *ngIf="subEditSrv.currentResponse">
+        <div class="container">
+            <label class="col-md-2 col-form-label"
+            for="questionId">Response</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                  id="responseId"
+                  type="text"
+                  placeholder="Response (required)"
+                  required
+                  name="response"
+                  [(ngModel)]=subEditSrv.currentResponse.response
+                  #questionVar="ngModel" />
+          </div>
+          <label class="col-md-2 col-form-label"
+          for="mnemonicId">Mnemonic</label>
+          <div class="col-md-8">
+          <input class="form-control"
+            id="mnemonicId"
+            type="text"
+            placeholder="Mnemonic (required)"
+            required
+            name="mnemonic"
+            [(ngModel)]=subEditSrv.currentResponse.mnemonic
+            #questionVar="ngModel" />
+          </div>
+
+          <label class="col-md-2 col-form-label"
+          for="hyperlink_1">Hyperlinks:</label>
+          <div class="col-md-6">
+            <input class="form-control"
+            id="hyperlink_1"
+            type="url"
+            name="subjectName"
+            [(ngModel)]=subEditSrv.currentResponse.hyperlink_1
+            #hyperlink_1Var="ngModel"/></div>
+          <div class="col-md-6">
+            <input class="form-control"
+            id="hyperlink_2"
+            type="url"
+            name="hyperlink_2"
+            [(ngModel)]=subEditSrv.currentResponse.hyperlink_2
+            #hyperlink_2Var="ngModel"/></div>
+          <div class="col-md-6">
+            <input class="form-control"
+            id="hyperlink_3"
+            type="url"
+            name="hyperlink_3"
+            [(ngModel)]=subEditSrv.currentResponse.hyperlink_3
+            #hyperlink_3Var="ngModel"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

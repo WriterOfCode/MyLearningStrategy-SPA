@@ -1,0 +1,123 @@
+<div class="panel panel-primary">
+    <div class="panel-body">
+      <div class="container-fluid pt-2">
+  `     <div class="form-group form-inline">Full text search: <input class="form-control ml-2"
+          type="text" name="searchTermQuestion"
+          [ngModel]="searchTerm"
+          (ngModelChange)='onSearchTermChanged($event)'/>
+          <button class="btn btn-primary ml-auto"
+          style="width:80px"
+          type="button"
+          title="Add"
+          (click)="onAdd()">Add</button>
+        </div>
+          <table class="table table-dark table-striped table-hover" style="table-layout:fixed">
+            <thead>
+              <tr>
+                <th colspan="2" scope="col" mLSResponseListSort="response" (sort)="onSort($event)" style="padding-left: 26px;">Response</th>
+                <th scope="col" mLSResponseListSort="mnemonic" (sort)="onSort($event)">Mnemonic</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let response of this.responses$ | async'  (click)="onSelected(response)"  >
+                <td colspan="2">
+                  <div *ngIf="response?.image_1_Cloud || response?.image_2_Cloud || response?.image_3_Cloud">
+                    <ngb-carousel
+                    [showNavigationArrows]="false"
+                    [showNavigationIndicators]="false"
+                    interval="1200"
+                    [keyboard]="false"
+                    [pauseOnHover]="true"
+                    [wrap]="false"
+                    [style.height.px]="55"
+                    [style.margin.px]="2">
+                      <ng-template ngbSlide  *ngIf="response?.image_1_Cloud">
+                        <div class="picsum-img-wrapper">
+                          <img class="float-left img-responsive mr-2"
+                          [style.height.px]="48"
+                          [style.margin.px]="2"
+                          [src]="response?.image_1_Cloud">
+                        </div>
+                      </ng-template>
+                      <ng-template ngbSlide  *ngIf="response?.image_2_Cloud">
+                        <div class="picsum-img-wrapper">
+                          <img class="float-left img-responsive mr-2"
+                          [style.height.px]="48"
+                          [style.margin.px]="2"
+                          [src]="response?.image_2_Cloud">
+                        </div>
+                      </ng-template>
+                      <ng-template ngbSlide  *ngIf="response?.image_3_Cloud">
+                        <div class="picsum-img-wrapper">
+                          <img class="float-left img-responsive mr-2"
+                          [style.height.px]="48"
+                          [style.margin.px]="2"
+                          [src]="response?.image_3_Cloud">
+                        </div>
+                      </ng-template>
+                    </ngb-carousel>
+                  </div>
+                  <div><ngb-highlight [result]="response?.response"
+                     [term]="searchTerm"
+                     style="word-break: keep-all; word-wrap: none;"></ngb-highlight></div>
+                </td>
+                <td>
+                  <div ><ngb-highlight [result]="response?.mnemonic"
+                    [term]="searchTerm"
+                    style="word-break: keep-all; word-wrap: none;"></ngb-highlight></div>
+                </td>
+                <td>
+                  <tr><a target="_blank" [href]='response?.hyperlink_1'>Hyperlink 1</a></tr>
+                  <tr><a target="_blank" [href]='response?.hyperlink_2'>Hyperlink 1</a></tr>
+                  <tr><a target="_blank" [href]='response?.hyperlink_3'>Hyperlink 1</a></tr>
+                </td>
+                <td>
+                  <tr style="padding-bottom: 8px;">
+                    <div class="p-2">
+                      <button class="btn btn-primary"
+                      style="width:80px"
+                      type="button"
+                      title="Edit this response"
+                      queryParamsHandling="preserve"
+                      (click)="onEdit(response)">Edit</button>
+                    </div>
+                  </tr>
+                  <tr style="padding-top: 8px;">
+                    <div class="p-2">
+                      <button class="btn btn-outline-warning"
+                      style="width:80px"
+                      type="button"
+                      title="Delete this question"
+                      (click)="onDelete(response)">Delete</button>
+                    </div>
+                  </tr>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            (pageChange)="onPageChange($event)"
+            [collectionSize]="collectionSize"
+            [(page)]="currentPage"
+            [pageSize]="pageSize">
+            <ng-template ngbPaginationFirst>First</ng-template>
+            <ng-template ngbPaginationLast>Last</ng-template>
+            <ng-template ngbPaginationPrevious>Prev</ng-template>
+            <ng-template ngbPaginationNext>Next</ng-template>
+            <ng-template ngbPaginationEllipsis>...</ng-template>
+            <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+          </ngb-pagination>
+
+          <select class="custom-select" style="width: auto" name="pageSize"
+            (ngModelChange)="onPageSizeChange($event)" [(ngModel)]="pageSize">
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+            <option [ngValue]="30">30 items per page</option>
+            <option [ngValue]="60">60 items per page</option>
+            <option [ngValue]="100">100 items per page</option>
+          </select>
+        </div>
+    </div>
+</div>
+

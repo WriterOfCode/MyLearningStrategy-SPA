@@ -1,0 +1,30 @@
+.file-upload{
+    display: none;
+}
+
+.file-picker{
+display: flex;
+align-items:flex-end;
+}
+
+.file-picker-center {
+margin: auto;
+width: 90%;
+padding: 10px;
+}
+
+
+.upload-btn{
+    margin-left: 10px;
+    margin-bottom: 15px;
+}
+
+.progress-bar{
+    margin-bottom: 10px;
+}
+
+.center {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+  }

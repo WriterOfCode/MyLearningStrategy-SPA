@@ -1,0 +1,84 @@
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <div class="container-fluid pt-2">
+      <div class="form-group form-inline">Full text search:
+        <input class="form-control ml-2"
+        type="text" 
+        name="searchTermStrategy"
+        [ngModel]="searchTerm"
+        (ngModelChange)='onSearchTermChanged($event)'/>
+        
+        <button class="btn btn-primary ml-auto"
+        style="width:80px"
+        type="button"
+        title="Add response"
+        (click)="onAdd()">Add</button>
+      </div>
+      <table class="table table-dark table-striped table-hover" style="table-layout:fixed;">
+        <thead  style="font-size: smaller;">
+          <tr>
+            <th colspan="2" scope="col" mLSCategoriesListSort="categoryName" (sort)="onSort($event)" style="padding-left: 26px;">Category</th>
+            <th scope="col">Image</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let category of categories | slice: (currentPage-1) * pageSize : (currentPage-1) * pageSize + pageSize' (click)="onSelected(category)"  >
+                <td colspan="2" ><ngb-highlight [result]="category.categoryName" [term]="searchTerm" class=".text-info" style="word-wrap: break-word; word-break: break-all;"></ngb-highlight></td>
+                <td style="align-items: center;">
+                  <div *ngIf="category.imageCloud">
+                    <img class="float-left img-responsive mr-2"
+                    [style.height.px]="48"
+                    [style.margin.px]="2"
+                    [src]=category.imageCloud>
+                  </div>
+                </td>
+                <td style="align-items: center; float:inline-end">
+                  <tr style="padding: 8px; margin: 5px; float: right;">
+                      <button class="btn btn-primary"
+                      style="width:80px"
+                      type="button"
+                      title="Edit this subject"
+                      (click)="onEdit(category)">Edit</button>
+                  </tr>
+                  <div style="margin: 5px;"></div>
+                  <tr style="padding: 8px; margin: 5px; float: right;">
+                      <button class="btn btn-outline-warning"
+                      style="width:80px"
+                      type="button"
+                      title="Delete this product"
+                      (click)="onDelete(category)">Delete</button>
+                  </tr>
+                </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination
+          (pageChange)="onPageChange($event)"
+          [collectionSize]="categoriesCount"
+          [(page)]="currentPage"
+          [pageSize]="pageSize">
+          <ng-template ngbPaginationFirst>First</ng-template>
+          <ng-template ngbPaginationLast>Last</ng-template>
+          <ng-template ngbPaginationPrevious>Prev</ng-template>
+          <ng-template ngbPaginationNext>Next</ng-template>
+          <ng-template ngbPaginationEllipsis>...</ng-template>
+          <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" name="pageSize"
+          (ngModelChange)="onPageSizeChange($event)" [(ngModel)]="pageSize">
+          <option [ngValue]="5">5 items per page</option>
+          <option [ngValue]="10">10 items per page</option>
+          <option [ngValue]="30">30 items per page</option>
+          <option [ngValue]="60">60 items per page</option>
+          <option [ngValue]="100">100 items per page</option>
+        </select>
+      </div>
+  </div>
+</div>
+
+
+
+

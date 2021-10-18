@@ -1,0 +1,19 @@
+<div class="panel panel-primary">
+<mls-subject-list
+  [subjects]="subjects$ | async"
+  [errorMessage]="errorMessage$ | async"
+  [searchTerm]="searchTerm$ | async"
+  [selectedSubject]="selectedSubject$ | async"
+  [pageSize]="pageSize$ | async"
+  [collectionSize]="subjectsCount$ | async"
+  [currentPage]="currentPage$ | async"
+  (currentPageChange)="onPageChange($event)"
+  (search)="onFilter($event)"
+  (pageSizeChange)="onPageSizeChange($event)"
+  (subjectSelected)="onSelected($any($event))"
+  (deleteSubject)="onDelete($event)"
+  (editSubject)="onEdit($any($event))"
+  (addSubject)="onAdd()"
+  (sortSubjects)="onSort($event)">
+</mls-subject-list>
+</div>

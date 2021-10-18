@@ -1,0 +1,40 @@
+<div class="container file-picker-center">
+  <input type="file"  style="display: none;" accept="image/*"
+ #nativeFileUpload name="nativeFileUpload" (change)="onFileSelected($event)">
+    <div class="row">
+
+      <div class="card" style="width:600px">
+        <img class="card-img-top" 
+        id=pickedImageId
+        name="pickedImage"
+        [src]=imageSrc
+        class="image-rounded">
+
+        <div class="card-body">
+          <h4 class="card-title">{{selectedFileName}}</h4>
+          <p class="card-text">{{selectedFileName}}</p>
+          <button type="button"  id=uploadbtnId  class="btn btn-warning"  (click)="nativeFileUpload.click()" >Select File</button>
+        </div>
+        <div class="card-footer" *ngIf="countUploadedItems>0">
+          <table class="table table-dark table-striped table-hover" style="table-layout:fixed" >
+            <thead>
+              <tr>
+                <th scope="col" >Filename</th>
+                <th scope="col" >Upload progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let upload of uploadedItemsList$ | async'>
+                <td> {{upload.filename}} </td>
+                <td>
+                  <ngb-progressbar type="info" textType="dark" [value]="upload.progress" [showValue]="true"></ngb-progressbar></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+</div>
+  

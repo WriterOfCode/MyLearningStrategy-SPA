@@ -1,0 +1,85 @@
+<div class="panel panel-primary" style="padding-top: 1rem;">
+
+  <div class="card">
+    <div class="card-header">{{pageTitle}}</div>
+    <div class="card-body">
+      <form novalidate #categoryEditForm="ngForm" >
+        <fieldset>
+          <div class="center"> 
+          <div class="form-group row">
+            <label class="form-label"
+            for="categoryNameId">Category Name</label>
+          </div>
+          <div class="form-group row">
+              <input class="form-control"
+                      id="categoryNameId"
+                      type="text"
+                      placeholder="Category Name (required)"
+                      required
+                      minlength="3"
+                      maxlength="50"
+                      name="categoryName"
+                      [(ngModel)]="currentCategory.categoryName"
+                      #categoryNameVar="ngModel">
+              <span class="invalid-feedback">
+                <span *ngIf="categoryNameVar.errors?.required">
+                  Category name is required.
+                </span>
+                <span *ngIf="categoryNameVar.errors?.minlength">
+                  Category name must be at least three characters.
+                </span>
+                <span *ngIf="categoryNameVar.errors?.maxlength">
+                  Category name can have a maimum of 50 echaracters.
+                </span>
+              </span>
+            
+          </div>
+        </div>
+          <div class="form-group row">
+            <div class="container cloudFilePickerCenter" >
+              <mls-file-picker 
+                id="imageCloudId" 
+                #imageCloudVar
+                name="imageCloud"
+                [(ngModel)]="currentCategory.imageCloud">
+              </mls-file-picker>
+            </div>
+
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+    <div class="card-footer">Cloud Image URL: {{currentCategory.imageCloud}}</div>
+    
+  </div>
+
+  <div class="h-25">
+    <div class="d-flex p-3">
+      <div class="p-2">
+        <button class="btn btn-primary mr-3"
+        style="width:80px"
+        type="button"
+        [title]="isValid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+        [disabled]="!isValid"
+        (click)="onSave()">Save</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn-outline-secondary mr-3"
+        style="width:80px"
+        type="button"
+        title="Cancel your edits"
+        onCancle
+        (click)="onCancel()">Cancel</button>
+      </div>
+      <div class="p-2"  *ngIf="currentCategory.id > 0">
+        <button class="btn btn-outline-warning"
+        style="width:80px"
+        type="button"
+        title="Delete this category"
+        (click)="onDelete()">Delete</button>
+      </div>
+    </div>
+  
+</div>
+

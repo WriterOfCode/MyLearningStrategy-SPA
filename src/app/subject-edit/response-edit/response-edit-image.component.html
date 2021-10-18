@@ -1,0 +1,10 @@
+<form novalidate #responseImageForm="ngForm">
+  <div class="container cloudFilePickerCenter" >
+    <mls-file-picker 
+      id="imageRCloudId" 
+      #imageRCloudVar
+      name="imageCloud"
+      [(ngModel)]="subEditSrv.currentResponse.image_1_Cloud">
+    </mls-file-picker>
+  </div>
+</form>

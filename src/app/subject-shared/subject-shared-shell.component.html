@@ -1,0 +1,21 @@
+<div id="services" class="container-fluid text-center">
+  <mls-home></mls-home>
+</div>
+
+<span ng-if="selectedSubject$" class="animate-if">
+  <mls-subject-shared
+  [subjects]="subjects$ | async"
+  [errorMessage]="errorMessage$ | async"
+  [searchTerm]="searchTerm$ | async"
+  [selectedSubject]="selectedSubject$ | async"
+  [pageSize]="pageSize$ | async"
+  [collectionSize]="subjectsCount$ | async"
+  [currentPage]="currentPage$ | async"
+
+  (currentPageChange)="onPageChange($event)"
+  (search)="onFilter($event)"
+  (pageSizeChange)="onPageSizeChange($event)"
+  (subjectSelected)="onSelected($any($event))"
+  (sortSubjects)="onSort($event)">
+  </mls-subject-shared>
+</span>

@@ -1,0 +1,29 @@
+<div  class="container-fluid pt-2">
+  <div class="d-flex flex-column">
+    <div class="h-25">
+      <div class="wizard">
+        <a [routerLink]="['info']"
+          routerLinkActive="active">
+          Information<span [ngClass]="{'fa fa-exclamation': !isValid('info')}"></span>
+        </a>
+        <a [routerLink]="['image']"
+            routerLinkActive="active">
+          Image<span [ngClass]="{'fa fa-exclamation': !isValid('image')}"></span>
+        </a>
+      </div>
+    </div>
+    <div class="h-50">
+      <div class="card">
+        <div class="card-header">
+          Response: {{subEditSrv.currentResponse.response}}
+        </div>
+        <div class="card-body" *ngIf="subEditSrv.currentResponse">
+          <div class="container">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+</div>

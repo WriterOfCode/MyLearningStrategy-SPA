@@ -1,0 +1,68 @@
+<div class="panel panel-primary">
+  <div  class="container-fluid pt-2">
+    <div class="d-flex flex-column" style="padding-top: 1rem;">
+      <div class="h-25">
+        <div class="wizard">
+          <a [routerLink]="['info']"
+            routerLinkActive="active">
+            Subject Information <fa-icon [icon]="exclamationTriangelIcon" *ngIf="!subjectEditService.isValid('info')" class="text-alert"></fa-icon>
+          </a>
+          <a [routerLink]="['image']"
+            routerLinkActive="active">
+            Image <fa-icon [icon]="exclamationTriangelIcon" *ngIf="!subjectEditService.isValid('image')" class="text-alert"></fa-icon>
+          </a>
+          <a [routerLink]="['questions']"
+            routerLinkActive="active">
+            Questions<fa-icon [icon]="exclamationTriangelIcon" *ngIf="!subjectEditService.isValid('questions')" class="text-alert"></fa-icon>
+          </a>
+        </div>
+      </div>
+      <div class="h-50">
+        <div class="card">
+          <div class="card-header">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p>{{subjectEditService.currentSubject?.title}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Plug in control here -->
+            <router-outlet></router-outlet>
+            <!-- Plug in control here -->
+          </div>
+        </div>
+      </div>
+      <div class="h-25">
+        <div class="d-flex p-3">
+          <div class="p-2">
+            <button class="btn btn-primary mr-3"
+            style="width:80px"
+            type="button"
+            [title]="(!subjectEditService.isValid() && !subjectEditService.isDirty)? 'Disabled until the form data is valid': 'Save your entered data'"
+            [disabled]="!subjectEditService.isValid() && !subjectEditService.isDirty"
+            (click)="onSave()">Save</button>
+          </div>
+          <div class="p-2">
+            <button class="btn btn-outline-secondary mr-3"
+            style="width:80px"
+            type="button"
+            title="Cancel your edits"
+            (click)="onCancel()">Cancel</button>
+          </div>
+          <div class="p-2">
+            <button class="btn btn-outline-warning"
+            *ngIf="subjectEditService.currentSubject?.subjectRowId"
+            style="width:80px"
+            type="button"
+            title="Delete this product"
+            (click)="onDelete()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+  </div>
+</div>
