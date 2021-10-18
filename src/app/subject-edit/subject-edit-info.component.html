@@ -1,0 +1,101 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
+<form #subjectInfoForm="ngForm">
+ <fieldset>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                  for="subjectNameId">Subject Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                    id="subjectNameId"
+                    type="text"
+                    placeholder="Name (required)"
+                    required
+                    minlength="3"
+                    maxlength="50"
+                    name="subjectName"
+                    [(ngModel)]=subjectEditService.currentSubject.title
+                    (change)="onChange(subjectNameVar)"
+                    #subjectNameVar="ngModel"
+                    [ngClass]="{'is-invalid':
+                     (subjectNameVar.touched ||
+                      subjectNameVar.dirty ||
+                      (subjectEditService.currentSubject.subjectRowId !== null &&
+                       subjectEditService.currentSubject.subjectRowId !== undefined)) &&
+                      !subjectNameVar.valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="subjectNameVar.errors?.required">
+                Subject name is required.
+              </span>
+              <span *ngIf="subjectNameVar.errors?.minlength">
+                Subject name must be at least three characters.
+              </span>
+              <span *ngIf="subjectNameVar.errors?.maxlength">
+                Subject name can have a maimum of 50 echaracters.
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                  for="descriptionId">Description</label>
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="descriptionId"
+                      placeholder="Description"
+                      rows=3
+                      [(ngModel)]=subjectEditService.currentSubject.description
+                      name="subjectDescription"
+                      #subjectDescriptionVar="ngModel"
+                      [ngClass]="{'is-invalid': (subjectDescriptionVar.touched ||
+                                                  subjectDescriptionVar.dirty ||
+                                                  subjectEditService.currentSubject.subjectRowId === null || subjectEditService.currentSubject.subjectRowId === undefined) &&
+                                                  !subjectDescriptionVar.valid }" >
+                    </textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label"
+                for="categoireiesId">Categories</label>
+          <div class="col-md-8">
+            <mat-form-field matNativeControl id="categoireiesId" class="form-control primary" style="min-height: 50px;">
+              <mat-select name="categoriesSelector" [compareWith] = "compareCategories"
+              [(value)]="subjectEditService.currentSubject.categories"
+              [(ngModel)] ="subjectEditService.currentSubject.categories"
+               multiple=true >
+                <mat-option *ngFor="let category of categories$ | async" [value]="category">{{category.categoryName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group row" >
+          <label class="col-md-2 col-form-label"
+          for="tagitlistId">Tags</label>
+          <div class="col-md-8">
+            <mat-form-field  style="background-color: white; color: black;" class="example-chip-list rounded">
+              <mat-chip-list #chipList aria-label="Tags"  [(ngModel)]="subjectEditService.currentSubject.tags" name="tags" >
+                <mat-chip
+                color="accent"
+                  *ngFor="let tagit of subjectEditService.currentSubject.tags"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(tagit)">
+                  {{tagit}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="New tag..."
+                  #tagInput
+
+
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+
+            </mat-form-field>
+          </div>
+        </div>
+  </fieldset>
+
+</form>

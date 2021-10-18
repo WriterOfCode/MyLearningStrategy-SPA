@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between p-2">
+  <h2 class="text-center home-heading" style="font-style: italic;">Shared Flashcards</h2>
+  <ngb-pagination
+    (pageChange)="onPageChange($event)"
+    [collectionSize]="collectionSize"
+    [(page)]="currentPage"
+    [pageSize]="pageSize"
+    [boundaryLinks]="true">
+    <ng-template ngbPaginationFirst>First</ng-template>
+    <ng-template ngbPaginationLast>Last</ng-template>
+    <ng-template ngbPaginationPrevious>Prev</ng-template>
+    <ng-template ngbPaginationNext>Next</ng-template>
+    <ng-template ngbPaginationEllipsis>...</ng-template>
+    <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+  </ngb-pagination>
+<!--
+  <select class="custom-select" style="width: auto" name="pageSize"
+    (ngModelChange)="onPageSizeChange($event)" [(ngModel)]="pageSize">
+    <option [ngValue]="5">5 items per page</option>
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="30">30 items per page</option>
+    <option [ngValue]="60">60 items per page</option>
+    <option [ngValue]="100">100 items per page</option>
+  </select> -->
+
+</div>
+<div class="card-deck" >
+  <!-- <ng-container *ngFor="let subject of subjects"> -->
+  <ng-container *ngFor='let subject of subjects | slice: (currentPage-1) * pageSize : (currentPage-1) * pageSize + pageSize' >
+  <!-- <ng-container *ngFor='let subject of subjects' (click)="onSelected(subject)"> -->
+  <div class="card" style="max-width:400px;" >
+    <div class="card-header bg-info  text-center"><em style="color:#ffffff">{{subject.title}}</em></div>
+    <div *ngIf="subject.imageCloud">
+      <img style="max-width: 100%; height:fit-content; border-radius: 8px; "
+      [src]=subject.imageCloud>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><ngb-highlight [result]="subject.title" [term]="search" style="word-break: keep-all; word-wrap: none;"></ngb-highlight></h5>
+      <p class="card-text"><ngb-highlight [result]="subject.description" [term]="search"></ngb-highlight></p>
+    </div>
+    <div class="card-footer">
+      <mat-chip-list #chipList aria-label="Tags">
+        <mat-chip color="accent" *ngFor="let tagit of subject.tags">{{tagit}}</mat-chip>
+      </mat-chip-list>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm" (click)="onSelected(subject)">Copy to my subjects.</button>
+  </div>
+
+  </ng-container>
+</div>
+
+

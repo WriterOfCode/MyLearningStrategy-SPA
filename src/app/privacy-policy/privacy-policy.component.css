@@ -1,0 +1,44 @@
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #167fc5 !important;
+  text-align:justify;
+  text-justify:inter-word;
+  margin-bottom: 0.5rem;
+  font-weight: 450;
+  line-height: 1.6;
+}
+
+
+
+.text-primary {
+  color: #375a7f !important;
+}
+
+a.text-primary:hover, a.text-primary:focus {
+  color: #20344a !important;
+}
+
+.text-secondary {
+  color: #444 !important;
+}
+
+a.text-secondary:hover, a.text-secondary:focus {
+  color: #1e1e1e !important;
+}
+
+.text-success {
+  color: #00bc8c !important;
+}
+
+a.text-success:hover, a.text-success:focus {
+  color: #007053 !important;
+}
+
+.text-info {
+  color: #3498DB !important;
+}
+
+a.text-info:hover, a.text-info:focus {
+  color: #1d6fa5 !important;
+}

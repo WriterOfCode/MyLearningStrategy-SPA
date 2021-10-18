@@ -1,0 +1,43 @@
+{
+   "style_name": "mlsimages",
+   "images": [
+      "answeradd40.png",
+      "answerdelete40.png",
+      "answerEdit40.png",
+      "audio40.png",
+      "audioNo40.png",
+      "bookshelf40.png",
+      "bookshelf40Add.png",
+      "bookshelf40delete.png",
+      "bookshelfEdit40.png",
+      "cloudbrain100.png",
+      "exam100.png",
+      "fail80.png",
+      "image64add2.png",
+      "image64no.png",
+      "openedfolder40.png",
+      "passed80.png",
+      "passfail80.png",
+      "question40Add.png",
+      "QuestionAnswer40.png",
+      "questionEdit40.png",
+      "questionX40.png",
+      "redcard80.png",
+      "settingsgears40.png",
+      "shakephone100.png",
+      "strategy40.png",
+      "strategy40add.png",
+      "strategy40delete.png",
+      "strategy40edit.png",
+      "strategy40history.png"
+   ],
+   "orientation": "vertical",
+   "padding": 5,
+   "custom_styles": {
+      "display": "inline-block"
+   },
+   "stylesheet": "css",
+   "path_prefix": "",
+   "output": "png",
+   "enable_cache_busting": true
+}

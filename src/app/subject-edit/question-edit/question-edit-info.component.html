@@ -1,0 +1,57 @@
+<form #questionInfoForm="ngForm">
+  <fieldset>
+    <div>
+      <div *ngIf="subEditSrv.currentQuestion">
+        <div class="container">
+          <label class="col-md-2 col-form-label"
+            for="questionId">Question</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                  id="questionId"
+                  type="text"
+                  placeholder="Question (required)"
+                  required
+                  name="question"
+                  [(ngModel)]=subEditSrv.currentQuestion.question
+                  #questionVar="ngModel" />
+          </div>
+          <label class="col-md-2 col-form-label"
+          for="mnemonicId">Mnemonic</label>
+          <div class="col-md-8">
+            <input class="form-control"
+              id="mnemonicId"
+              type="text"
+              placeholder="Mnemonic"
+              name="mnemonic"
+              [(ngModel)]=subEditSrv.currentQuestion.mnemonic
+              #questionVar="ngModel" />
+          </div>
+          <label class="col-md-2 col-form-label"
+          for="hyperlink_1">Hyperlinks:</label>
+          <div class="col-md-6">
+            <input class="form-control"
+            id="hyperlink_1"
+            type="url"
+            name="subjectName"
+            [(ngModel)]=subEditSrv.currentQuestion.hyperlink_1
+            #hyperlink_1Var="ngModel"/></div>
+          <div class="col-md-6">
+            <input class="form-control"
+            id="hyperlink_2"
+            type="url"
+            name="hyperlink_2"
+            [(ngModel)]=subEditSrv.currentQuestion.hyperlink_2
+            #hyperlink_2Var="ngModel"/></div>
+          <div class="col-md-6">
+            <input class="form-control"
+            id="hyperlink_3"
+            type="url"
+            name="hyperlink_3"
+            [(ngModel)]=subEditSrv.currentQuestion.hyperlink_3
+            #hyperlink_3Var="ngModel"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

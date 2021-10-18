@@ -1,0 +1,153 @@
+<div  class="container-fluid pt-2">
+  <div class="d-flex flex-column" style="padding-top: 1rem;">
+    <div class="h-50">
+      <div class="card">
+        <div class="card-header">{{pageTitle}} {{ currentStrategy.name }}</div>
+        <div class="card-body">
+          <form novalidate #subjectTagsForm="ngForm">
+            <fieldset>
+              <div class="form-group row" style="padding-left: 20px;">
+                <label class="col-md-2 col-form-label"
+                        for="strategyNameId">Strategy Name</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                          id="strategyNameId"
+                          type="text"
+                          placeholder="Name (required)"
+                          required
+                          minlength="3"
+                          maxlength="50"
+                          name="strategyName"
+                          [(ngModel)]="currentStrategy.name"
+                          #strategyNameVar="ngModel">
+                  <span class="invalid-feedback">
+                    <span *ngIf="strategyNameVar.errors?.required">
+                      Strategy name is required.
+                    </span>
+                    <span *ngIf="strategyNameVar.errors?.minlength">
+                      Strategy name must be at least three characters.
+                    </span>
+                    <span *ngIf="strategyNameVar.errors?.maxlength">
+                      Strategy name can have a maimum of 50 echaracters.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group row" style="padding-left: 20px;">
+                <label class="col-md-2 col-form-label"
+                        for="strategyDescriptionId">Strategy Description</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                          id="strategyDescriptionId"
+                          type="text"
+                          placeholder="Description"
+                          minlength="3"
+                          maxlength="50"
+                          name="strategyDescription"
+                          [(ngModel)]=currentStrategy.description
+                          #strategyDescriptionVar="ngModel">
+                  <span class="invalid-feedback">
+                    <span *ngIf="strategyDescriptionVar.errors?.minlength">
+                      Strategy name must be at least three characters.
+                    </span>
+                    <span *ngIf="strategyDescriptionVar.errors?.maxlength">
+                      Strategy name can have a maimum of 50 echaracters.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group row" style="padding-left: 20pt;">
+                <div class="custom-control custom-switch">
+                  <input class="custom-control-input"
+                  id="recycleIncorrectId"
+                  type="checkbox"
+                  [(ngModel)]="currentStrategy.recycleIncorrectlyAnswered"
+                  [(value)]="currentStrategy.recycleIncorrectlyAnswered"
+                  name="recycleIncorrect"
+                  #switchRecycleVar="ngModel">
+                  <label class="custom-control-label"
+                  for="recycleIncorrectId">Recycle Only Incorrectly Answered</label>
+                </div>
+              </div>
+              <div class="form-group row" style="padding-left: 20pt;">
+                <div class="custom-control custom-switch">
+                  <input class="custom-control-input"
+                  id="onlyCorrectId"
+                  type="checkbox"
+                  [(ngModel)]="currentStrategy.onlyCorrect"
+                  [(value)]="currentStrategy.onlyCorrect"
+                  name="onlyCorrect"
+                  #switchCorrectVar="ngModel">
+                  <label class="custom-control-label"
+                  for="onlyCorrectId">Pick Only Correct Responses</label>
+                </div>
+              </div>
+              <div class="form-group row" style="padding-left: 10pt;">
+                <label class="col-md-2 col-form-label"
+                for="sortRuleId">Question Sort Order</label>
+                <div class="col-md-5 primary">
+                  <mat-form-field matNativeControl id="sortRuleId" class="form-control primary" style="min-height: 50px;">
+                    <mat-select name="sortRuleSelector" [(ngModel)]="currentStrategy.sortRuleId">
+                      <mat-option *ngFor="let sortRule of questionSortRules" [(value)]="sortRule.Id">{{sortRule.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-group row" style="padding-left: 10pt;">
+                <label class="col-md-2 col-form-label"
+                for="sortRuleId">Question Selections</label>
+                <div class="col-md-5 primary">
+                  <mat-form-field matNativeControl id="questionSelectionId" class="form-control primary" style="min-height: 50px;">
+                    <mat-select name="questionSelector" [(ngModel)]="currentStrategy.questionSelection" mutiple>
+                      <mat-option *ngFor="let qslections of questionSelections" [(value)]="qslections.Id">{{qslections.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-group row" style="padding-left: 10pt;">
+                <label class="col-md-2 col-form-label"
+                for="sortRuleId">Response Selections</label>
+                <div class="col-md-5 primary">
+                  <mat-form-field matNativeControl id="responseSelectionId" class="form-control primary" style="min-height: 50px;">
+                    <mat-select name="responseSelector" [(ngModel)]="currentStrategy.responseSelection" mutiple>
+                      <mat-option *ngFor="let rselection of responseSelections" [(value)]="rselection.Id">{{rselection.Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-25">
+    <div class="d-flex p-3">
+      <div class="p-2">
+        <button class="btn btn-primary mr-3"
+        style="width:80px"
+        type="button"
+        [title]="isValid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+        [disabled]="!isValid"
+        (click)="saveStrategy()">Save</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn-outline-secondary mr-3"
+        style="width:80px"
+        type="button"
+        title="Cancel your edits"
+        [routerLink]="['/strategies']">Cancel</button>
+      </div>
+      <div class="p-2">
+        <button class="btn btn-outline-warning"
+        *ngIf="currentStrategy.id>0"
+        style="width:80px"
+        type="button"
+        title="Delete this strategy"
+        (click)="deleteStrategy()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

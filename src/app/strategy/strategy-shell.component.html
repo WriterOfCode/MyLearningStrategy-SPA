@@ -1,0 +1,19 @@
+<div class="panel panel-primary">
+  <mls-strategy-list
+    [strategies]="strategies$ | async"
+    [errorMessage]="errorMessage$ | async"
+    [searchTerm]="searchTerm$ | async" 
+    [selectedStragegy]="selectedStrategy$ |async"
+    [pageSize]="pageSize$ | async"
+    [strategiesCount]="strategiesCount$ | async"
+    [currentPage]="currentPage$ | async"
+    (currentPageChange)="currentPageChange($event)"
+    (search)="filter($event)"
+    (pageSizeChange)="pageSizeChange($event)"
+    (strategySelected)="onSelected($any($event))"
+    (deleteStrategy)="deleteStrategy($event)"
+    (editStrategy)="editStrategy($any($event))"
+    (addStrategy)="addStrategy()"
+    (sortStrategies)="onSort($event)">
+  </mls-strategy-list>
+</div>

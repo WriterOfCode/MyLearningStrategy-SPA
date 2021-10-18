@@ -1,0 +1,38 @@
+/* Sortable table demo */
+
+  th[mLSStrategyListSort] {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  }
+
+  th[mLSStrategyListSort].desc:before, th[mLSStrategyListSort].asc:before {
+  content: '';
+  display: block;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABmJLR0QA/wD/AP+gvaeTAAAFTUlEQVRYhc2YW2wUVRjH/+fMTLs7e+v2xraiiwGkglqgJS2LiSSUlDYhPiDxwfhiSIiIJpLU0hqTPhBomvhA0Gg1MdFHSDRCpAUaDYqlQEs1pBcLQhe027qUbWdnp9PuzDk+0C7bcunu0rL83ubMOTO/+c435wY85ZCUWnFOtjW2lwJChZQhbOHgRabBchjnFgCghOiCSEcB0m9EzTaTkLYztWWdiy5Y0djpkgRzLwX2SqJo8+RmZeTluDIdciYslgxkiCIAYMowoOtTCEd0BO8ok4HRUNSIsjAD/xwRfqSloVxZUMGS5k4pf9ysAVBfmOcmK7xLZLfTnsy3IaSouDoY0AK3xzkBPzDiEj/t2l0afWzBysaLayQRJ7Kccv66F5+32ayWpMTmomo6uvtvREKKNsKn2PaW+vLelAWrmzp2gNBvi4u8Vm9BLn0sszn4h4Lsz/5BnXD+9k+1G79PWrCy6fyuDEE8vKlklZxlty2kW4wxJYJz3f2aOcXeb6kr/yZhweqmjh1UEL7bvGG1bJcfr0vnQ9V0nL3UMxFlxlutNb4f5hWsOtixmkj04mulRTaXI7nIlRYSCAS48C9Pql1IieC3rv6IETVKT9f7+uPvzcqrkuZOiUr0ePEqrzUVuZICgrUegrJnkhte3U4bXln5rFXKEE5sbvhFfKhgvmLuczttS7yFyf0QM3IzpCK5bGk+ddltHtkqfxhfHntKVUOHEzIZ2lL+ki2ZvJsrF88fwzyp7g5HJvDzxR5VYtHC47WvhoG4CBIL9hTkushCyQHJR9Jhs8KT46JRSHtmymKCVCR7V3oL5IWSS1VyxXMeWRDIe7MEqw61rxME0eV2JTZ9JSqXimR2lgOCQN3Vje0vA4AIAJwKFZ5cl/jopvfoHOLoHJqdW7tLZv9XzV0s0cfNggDw5GaJ/kCwAsAVCgCSSCvysl2LOyInQa7baZGouBWY7mIOFDkWecZIBofNAg5eBEwLMoPlWi0Z6bWKQ7ZkwuQsD5gRBMsUBSG9VnGIAgVnuLs6T7fMfFAAoITqhmmm2yVG1DBBKHRgWpBQEpzQJ9NrFYemT0Gg9D9gJoIgfUpET69VHKqmA0AvMC0YNYy2YEiZSKdUPME74xOGYZ4BYhHkZ0aCY2Zyy8zFgQMIBMeZAdwTPLnfd8Xg7PadsXBa5QBgNKSAcfN2W+3GPiBumDGZeWTAH4ikT+0uV/2BiBnF4ZnrmCCD3BwcVZgSSV8qKqqGYChsMtHy1UxZTPB0TXHEBP/kcs8NNR25yAFc7htUOfDx6ZriWE/Omkmcy25+pka0W9dvjTzxUfvazWEzHJnw273+L+LL71tFVh5qXyGKQrdv/Sp7jsvxRORGx8I41/2XCm6sbflo09/x9+6bi0/V+a6ZUf7m+csDmqJqiy6nqBrOdw9MMMPcOVfugYIA0FpfftLgfNevXX3a6PjiDT2jY2GcvdSnGSZ751Sdr/VBdR65Uag81L6NisKxNcuXWpc/5xFSO+28Hw7gmn/Y6L3+j85N843W/b5TD6s77zurmn5fLlDpR7ts9a5fvczutCe88XsgY2oE3b2Dqqrpg5NR8npb3Ybrj6qfUFB2Hj0qqDe874LgQF62Q1zpLbTlZTkSP5/lQDAUxlV/QA2GFJObvL58suzLhgYy784qqV7b3tApR63RXZIgfsAJL/DkuJGX7ZQdNgtkSyZE8W5KGwaDpk9OHwGPa8Oj4wAwZBjGEYfEvz62z5fwbJByWlUfvPACE3iFKApbCWdrTI58zrgVhHBCoFNKR8B4j8FYGzVJ28n6soFU3/VU8z/3oB4H+wapMAAAAABJRU5ErkJggg==')  no-repeat;
+  background-size: 22px;
+  width: 22px;
+  height: 22px;
+  float: left;
+  margin-left: -22px;
+  }
+
+
+  th[mLSStrategyListSort].desc:before {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  }
+
+  /* Filtering table demo */
+  ngbd-table-filtering span.ngb-highlight {
+    background-color: white;
+    font-style: italic;
+    color: red;
+  }
+
+  /* Complete table demo */
+  ngbd-table-complete span.ngb-highlight {
+    background-color: white;
+    font-style: italic;
+    color: red;
+  }

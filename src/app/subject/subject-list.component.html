@@ -1,0 +1,90 @@
+<div class="panel-body">
+  <div class="container-fluid pt-2">
+    <div class="form-group form-inline">Full text search: <input class="form-control ml-2"
+      type="text" 
+      name="searchTermQuestion"
+      [ngModel]="searchTerm"
+      (ngModelChange)='onSearchTermChanged($event)'/>
+      <button class="btn btn-primary ml-auto"
+      style="width:80px"
+      type="button"
+      title="Add"
+      (click)="onAdd()">Add</button>
+    </div>
+    <table class="table table-dark table-striped table-hover" style="table-layout:fixed">
+      <thead>
+        <tr>
+          <th scope="col" mLSSubjectList="title" (sort)="onSort($event)" colspan="2"  style="padding-left: 26px;">Subject</th>
+          <th scope="col" mLSSubjectList="description" (sort)="onSort($event)">Description</th>
+          <th scope="col" mLSSubjectList="keywords" (sort)="onSort($event)">Tags</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let Subject of subjects | slice: (currentPage-1) * pageSize : (currentPage-1) * pageSize + pageSize' (click)="onSelected(Subject)">
+          <td colspan="2">
+            <div *ngIf="Subject.imageCloud">
+              <img class="float-left img-responsive mr-2"
+              [style.height.px]="48"
+              [style.margin.px]="2"
+              [src]=Subject.imageCloud>
+            </div>
+            <div ><ngb-highlight [result]="Subject.title" [term]="search" style="word-break: keep-all; word-wrap: none;"></ngb-highlight></div>
+            <div>{{Subject.questions.length}}</div>
+          </td>
+          <td><ngb-highlight [result]="Subject.description" [term]="search"></ngb-highlight></td>
+          <!-- <td><ngb-highlight [result]="Subject.keywords" [term]="search" style="word-wrap: break-word;"></ngb-highlight></td> -->
+
+          <td>
+            <mat-chip-list #chipList aria-label="Tags">
+              <mat-chip color="accent" *ngFor="let tagit of Subject.tags">{{tagit}}</mat-chip>
+            </mat-chip-list>
+          </td>
+
+
+          <td style="align-items: center; float:inline-end">
+            <tr style="padding: 8px; margin: 5px; float: right;">
+              <div class="p-2">
+                <button class="btn btn-primary"
+                style="width:80px"
+                type="button"
+                title="Edit this subject"
+                (click)="onEdit(Subject)">Edit</button>
+              </div>
+            </tr>
+            <tr style="padding: 8px; margin: 5px; float: right;">
+              <div class="p-2">
+                <button class="btn btn-outline-warning"
+                style="width:80px"
+                type="button"
+                title="Delete this product"
+                (click)="onDelete(Subject)">Delete</button>
+              </div>
+            </tr>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination
+        (pageChange)="onPageChange($event)"
+        [collectionSize]="collectionSize"
+        [(page)]="currentPage"
+        [pageSize]="pageSize">
+        <ng-template ngbPaginationFirst>First</ng-template>
+        <ng-template ngbPaginationLast>Last</ng-template>
+        <ng-template ngbPaginationPrevious>Prev</ng-template>
+        <ng-template ngbPaginationNext>Next</ng-template>
+        <ng-template ngbPaginationEllipsis>...</ng-template>
+        <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+      </ngb-pagination>
+
+      <select class="custom-select" style="width: auto" name="pageSize"
+        (ngModelChange)="onPageSizeChange($event)" [(ngModel)]="pageSize">
+        <option [ngValue]="5">5 items per page</option>
+        <option [ngValue]="10">10 items per page</option>
+        <option [ngValue]="30">30 items per page</option>
+        <option [ngValue]="60">60 items per page</option>
+        <option [ngValue]="100">100 items per page</option>
+      </select>
+    </div>
+</div>
